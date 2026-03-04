@@ -13,12 +13,12 @@ jobs:
            node-version: '20.x'
 
        - name: 'Install Dependencies'
-         working-directory: my-app
+         working-directory: ./my-app
          run: |            
             npm ci
 
        - name: 'Run Unit Tests'
-         working-directory: my-app
+         working-directory: ./my-app
          run: |            
             npm run test
         
