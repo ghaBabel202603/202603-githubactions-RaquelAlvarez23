@@ -5,3 +5,4 @@ Ejercicios:
  - [Act. Types](./ejercicios/06-activityTypes.md)
 
 Ejercicio: ejercicio 6 parte 5
+Parte 7 hecha, PR y revisión de resultados
