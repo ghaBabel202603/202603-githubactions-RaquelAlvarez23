@@ -1,0 +1,11 @@
+name: 05 - Event Filters
+on:
+  push:
+    branches:
+      - main
+jobs:
+  echo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo message
+        run: echo 'Running whenever branch is main'
