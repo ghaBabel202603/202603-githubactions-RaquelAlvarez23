@@ -1,8 +1,14 @@
 name: 07 - Contexts
-run-name: My custom workflow run name - ${{ runner.os }}
+run-name: 07 - Contexts | DEBUG - ${{ inputs.debug }}
 on:
   push:
   workflow_dispatch:
+    inputs:
+      debug:
+        type: boolean
+        description: 'Run with debug logging'
+        required: false
+        default: false
 
 jobs:
   echo-data:
@@ -19,4 +25,4 @@ jobs:
           echo "Número de ejecución: ${{ github.run_number }}"
       - name: Retrieve Variable
         run: |
-          echo "El valor de la variable es: ${{ vars.MY_VAR }}"
+            echo "El valor de la variable es: ${{ vars.MY_VAR }}"
