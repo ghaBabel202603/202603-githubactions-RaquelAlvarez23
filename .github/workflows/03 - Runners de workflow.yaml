@@ -1,6 +1,6 @@
 name: Runners de workflow
 on:
-  push:
+  workflow_dispatch:
 jobs:
   ubuntu-echo:
     runs-on: ubuntu-latest
