@@ -1,4 +1,5 @@
 name: 14 - Using Cache
+
 on:
   workflow_dispatch:
     inputs:
@@ -12,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./14-caching
+        working-directory: 14-caching
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -20,12 +21,21 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "24.x"
+          node-version: ${{ inputs.node-version }}
 
-      - name: Install Dependencies
+      - name: Download cached dependencies
+        if: ${{ inputs.use-cache == true }}
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: 14-caching/react-app/node_modules
+          key: deps-node-modules-${{ hashFiles('14-caching/react-app/package-lock.json') }}
+
+      - name: Install dependencies
+        if: ${{ steps.cache.outputs.cache-hit != 'true' }}
         run: npm ci
 
-      - name: Run Tests
+      - name: Testing
         run: npm run test
 
       - name: Building
