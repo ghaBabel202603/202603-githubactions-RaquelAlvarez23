@@ -3,12 +3,18 @@ name: 15 - Working with Artifacts
 on:
   workflow_dispatch:
 
+env:
+  build-artifact-key: app-${{ github.sha }}
+  test-coverage-key: test-coverage-${{ github.sha }}
+
 jobs:
   test-build:
     runs-on: ubuntu-latest
+
     defaults:
       run:
         working-directory: 15-artifacts/react-app
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -30,7 +36,13 @@ jobs:
         run: npm ci
 
       - name: Unit tests
-        run: npm run test
+        run: npm run test -- --coverage --watchAll=false
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.test-coverage-key }}
+          path: 15-artifacts/react-app/coverage
 
       - name: Build code
         run: npm run build
@@ -38,15 +50,16 @@ jobs:
       - name: Upload build files
         uses: actions/upload-artifact@v4
         with:
-          name: app
+          name: ${{ env.build-artifact-key }}
           path: 15-artifacts/react-app/build
 
   deploy:
     runs-on: ubuntu-latest
     needs: test-build
+
     steps:
       - name: Download build files
         uses: actions/download-artifact@v4
         with:
-          name: app
+          name: ${{ env.build-artifact-key }}
           path: build
