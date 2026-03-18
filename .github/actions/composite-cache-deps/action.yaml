@@ -18,7 +18,6 @@ runs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ inputs.node-version }}
-      shell: bash
 
     - name: Cache dependencies
       id: cache
@@ -26,7 +25,6 @@ runs:
       with:
         path: ${{ inputs.working-dir }}/node_modules
         key: deps-node-modules-${{ hashFiles(format('{0}/{1}', inputs.working-dir, 'package-lock.json')) }}
-      shell: bash
 
     - name: Install dependencies
       if: steps.cache.outputs.cache-hit != 'true'
