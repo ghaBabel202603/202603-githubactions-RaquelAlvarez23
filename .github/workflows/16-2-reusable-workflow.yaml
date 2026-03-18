@@ -5,7 +5,7 @@ on:
 
 jobs:
   deploy:
-    uses: ./.github/workflows/16-1-reusable-workflow.yaml
+    uses: RaquelAlvarez23/Curso-GitHub-workflows-CICD/.github/workflows/16-1-reusable-workflow.yaml@main
     with:
       target-directory: 'production-build'
 
