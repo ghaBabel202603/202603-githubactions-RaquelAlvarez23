@@ -17,7 +17,7 @@ on:
       working-directory:
         description: 'Working directory of the project'
         required: true
-        default: '17-custom-actions/react-app'
+        default: '17-custom-actions/my-app'
         type: string
       debug:
         description: 'Enable debug output'
